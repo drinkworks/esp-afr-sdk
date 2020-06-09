@@ -1,0 +1,231 @@
+menu "Drinkworks Configuration"
+
+    config DW_RELEASE_BUILD
+        bool "Release Build Configuration"
+        default "y"
+        help
+            If this is not enabled, allow setting of individual settings.
+            
+    menu "Drinkworks Log Settings"
+        depends on !DW_RELEASE_BUILD
+    
+        choice DW_LOG_APP_LEVEL
+            bool "Drinkworks Firmware Application log verbosity"
+            default DW_LOG_APP_NONE
+            help
+                Specify how much output to see in the Firmware Application logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_APP_NONE
+                bool "No output"
+            config DW_LOG_APP_ERROR
+                bool "Error"
+            config DW_LOG_APP_WARN
+                bool "Warning"
+            config DW_LOG_APP_INFO
+                bool "Info"
+            config DW_LOG_APP_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_APP_LEVEL
+            int
+            default 0 if DW_LOG_APP_NONE
+            default 1 if DW_LOG_APP_ERROR
+            default 2 if DW_LOG_APP_WARN
+            default 3 if DW_LOG_APP_INFO
+            default 4 if DW_LOG_APP_DEBUG
+    
+        choice DW_LOG_BLE_LEVEL
+            bool "BLE log verbosity"
+            default DW_LOG_BLE_NONE
+            help
+                Specify how much output to see in BLE logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_BLE_NONE
+                bool "No output"
+            config DW_LOG_BLE_ERROR
+                bool "Error"
+            config DW_LOG_BLE_WARN
+                bool "Warning"
+            config DW_LOG_BLE_INFO
+                bool "Info"
+            config DW_LOG_BLE_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_BLE_LEVEL
+            int
+            default 0 if DW_LOG_BLE_NONE
+            default 1 if DW_LOG_BLE_ERROR
+            default 2 if DW_LOG_BLE_WARN
+            default 3 if DW_LOG_BLE_INFO
+            default 4 if DW_LOG_BLE_DEBUG
+    
+        choice DW_LOG_SHCI_LEVEL
+            bool "SHCI log verbosity"
+            default DW_LOG_SHCI_NONE
+            help
+                Specify how much output to see in Serial Host Commnand
+                Interface (SHCI) logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_SHCI_NONE
+                bool "No output"
+            config DW_LOG_SHCI_ERROR
+                bool "Error"
+            config DW_LOG_SHCI_WARN
+                bool "Warning"
+            config DW_LOG_SHCI_INFO
+                bool "Info"
+            config DW_LOG_SHCI_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_SHCI_LEVEL
+            int
+            default 0 if DW_LOG_SHCI_NONE
+            default 1 if DW_LOG_SHCI_ERROR
+            default 2 if DW_LOG_SHCI_WARN
+            default 3 if DW_LOG_SHCI_INFO
+            default 4 if DW_LOG_SHCI_DEBUG
+    
+        choice DW_LOG_MQTT_LEVEL
+            bool "MQTT log verbosity"
+            default DW_LOG_MQTT_NONE
+            help
+                Specify how much output to see in MQTT logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_MQTT_NONE
+                bool "No output"
+            config DW_LOG_MQTT_ERROR
+                bool "Error"
+            config DW_LOG_MQTT_WARN
+                bool "Warning"
+            config DW_LOG_MQTT_INFO
+                bool "Info"
+            config DW_LOG_MQTT_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_MQTT_LEVEL
+            int
+            default 0 if DW_LOG_MQTT_NONE
+            default 1 if DW_LOG_MQTT_ERROR
+            default 2 if DW_LOG_MQTT_WARN
+            default 3 if DW_LOG_MQTT_INFO
+            default 4 if DW_LOG_MQTT_DEBUG
+    
+        choice DW_LOG_NVS_LEVEL
+            bool "NVS log verbosity"
+            default DW_LOG_NVS_NONE
+            help
+                Specify how much output to see in NVS logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_NVS_NONE
+                bool "No output"
+            config DW_LOG_NVS_ERROR
+                bool "Error"
+            config DW_LOG_NVS_WARN
+                bool "Warning"
+            config DW_LOG_NVS_INFO
+                bool "Info"
+            config DW_LOG_NVS_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_NVS_LEVEL
+            int
+            default 0 if DW_LOG_NVS_NONE
+            default 1 if DW_LOG_NVS_ERROR
+            default 2 if DW_LOG_NVS_WARN
+            default 3 if DW_LOG_NVS_INFO
+            default 4 if DW_LOGNVS_DEBUG
+    
+        choice DW_LOG_CRED_LEVEL
+            bool "Credential Storage log verbosity"
+            default DW_LOG_CRED_NONE
+            help
+                Specify how much output to see in Credential Storage logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_CRED_NONE
+                bool "No output"
+            config DW_LOG_CRED_ERROR
+                bool "Error"
+            config DW_LOG_CRED_WARN
+                bool "Warning"
+            config DW_LOG_CRED_INFO
+                bool "Info"
+            config DW_LOG_CRED_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_CRED_LEVEL
+            int
+            default 0 if DW_LOG_CRED_NONE
+            default 1 if DW_LOG_CRED_ERROR
+            default 2 if DW_LOG_CRED_WARN
+            default 3 if DW_LOG_CRED_INFO
+            default 4 if DW_LOG_CRED_DEBUG
+    
+        choice DW_LOG_FLEET_PROVISIONING_LEVEL
+            bool "Fleet Provisioning log verbosity"
+            default DW_LOG_FLEET_PROVISIONING_NONE
+            help
+                Specify how much output to see in Fleet Provisioning logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_FLEET_PROVISIONING_NONE
+                bool "No output"
+            config DW_LOG_FLEET_PROVISIONING_ERROR
+                bool "Error"
+            config DW_LOG_FLEET_PROVISIONING_WARN
+                bool "Warning"
+            config DW_LOG_FLEET_PROVISIONING_INFO
+                bool "Info"
+            config DW_LOG_FLEET_PROVISIONING_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_FLEET_PROVISIONING_LEVEL
+            int
+            default 0 if DW_LOG_FLEET_PROVISIONING_NONE
+            default 1 if DW_LOG_FLEET_PROVISIONING_ERROR
+            default 2 if DW_LOG_FLEET_PROVISIONING_WARN
+            default 3 if DW_LOG_FLEET_PROVISIONING_INFO
+            default 4 if DW_LOG_FLEET_PROVISIONING_DEBUG
+    endmenu
+
+endmenu # "Drinkworks Configuration"

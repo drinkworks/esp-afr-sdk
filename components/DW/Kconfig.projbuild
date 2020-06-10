@@ -226,6 +226,33 @@ menu "Drinkworks Configuration"
             default 2 if DW_LOG_FLEET_PROVISIONING_WARN
             default 3 if DW_LOG_FLEET_PROVISIONING_INFO
             default 4 if DW_LOG_FLEET_PROVISIONING_DEBUG
+
+        choice DW_LOG_OTA_LEVEL
+            bool "FreeRTOS OTA Agent log verbosity"
+            default DW_LOG_OTA_NONE
+            help
+                Specify how much output to see in FreeRTOS OTA Agent logs.
+    
+                Level 1 has least verbose logging
+                Level 3 has most verbose logging
+    
+            config DW_LOG_OTA_NONE
+                bool "No output"
+            config DW_LOG_OTA_L1
+                bool "Level 1"
+            config DW_LOG_OTA_L2
+                bool "Level 2"
+            config DW_LOG_OTA_L3
+                bool "Level 3"
+        endchoice
+        
+        config DW_LOG_OTA_LEVEL
+            int
+            default 0 if DW_LOG_OTA_NONE
+            default 1 if DW_LOG_OTA_L1
+            default 2 if DW_LOG_OTA_L2
+            default 3 if DW_LOG_OTA_L3
+ 
     endmenu
 
 endmenu # "Drinkworks Configuration"

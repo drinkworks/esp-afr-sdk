@@ -581,10 +581,14 @@ extern "C" esp_err_t nvs_flash_generate_keys(const esp_partition_t* partition, n
         return err;
     }
 
-    for(uint8_t cnt = 0; cnt < NVS_KEY_SIZE; cnt++) {
-        cfg->eky[cnt] = 0xff;
-        cfg->tky[cnt] = 0xee;
-    }
+    /* Use RNG to fill eky and tky buffers */
+    esp_fill_random( cfg->eky, NVS_KEY_SIZE );
+    esp_fill_random( cfg->tky, NVS_KEY_SIZE );
+
+//    for(uint8_t cnt = 0; cnt < NVS_KEY_SIZE; cnt++) {
+//        cfg->eky[cnt] = 0xff;
+//        cfg->tky[cnt] = 0xee;
+//    }
 
     err = spi_flash_write(partition->address, cfg->eky, NVS_KEY_SIZE);
     if(err != ESP_OK) { 

@@ -163,7 +163,7 @@ menu "Drinkworks Configuration"
             default 1 if DW_LOG_NVS_ERROR
             default 2 if DW_LOG_NVS_WARN
             default 3 if DW_LOG_NVS_INFO
-            default 4 if DW_LOGNVS_DEBUG
+            default 4 if DW_LOG_NVS_DEBUG
     
         choice DW_LOG_CRED_LEVEL
             bool "Credential Storage log verbosity"

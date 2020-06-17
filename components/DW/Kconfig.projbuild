@@ -1,5 +1,11 @@
 menu "Drinkworks Configuration"
 
+    config PROJECT_NAME
+    string "Name of Project"
+    default "dw_"
+    help
+        Override default project name (esp-idf). This gets built into Application
+        
     config DW_RELEASE_BUILD
         bool "Release Build Configuration"
         default "y"

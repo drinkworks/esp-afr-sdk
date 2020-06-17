@@ -30,7 +30,11 @@ const __attribute__((section(".rodata_desc"))) esp_app_desc_t esp_app_desc = {
 #ifdef CONFIG_APP_EXCLUDE_PROJECT_NAME_VAR
     .project_name = "",
 #else
-    .project_name = PROJECT_NAME,
+	#ifdef CONFIG_PROJECT_NAME
+		.project_name = CONFIG_PROJECT_NAME,
+	#else
+		.project_name = PROJECT_NAME,
+	#endif
 #endif
     .idf_ver = IDF_VER,
 

@@ -73,3 +73,6 @@
 [submodule "components/nimble/nimble"]
 	path = components/nimble/nimble
 	url = https://github.com/espressif/esp-nimble.git
+[submodule "components/esp32-camera"]
+	path = components/esp32-camera
+	url = https://github.com/drinkworks/drinkworks-firmware-camera

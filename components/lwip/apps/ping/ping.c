@@ -61,6 +61,10 @@
 #include "esp_ping.h"
 #include "lwip/ip_addr.h"
 #endif
+
+//#undef	PING_USE_SOCKETS
+//#define PING_USE_SOCKETS 1
+
 /**
  * PING_DEBUG: Enable debugging for PING.
  */
@@ -181,7 +185,7 @@ ping_send(int s, ip_addr_t *addr)
 static void
 ping_recv(int s)
 {
-  char buf[64];
+  char buf[1024];							// buffer size increased to allow for larger ICMP packets
   int len;
   struct sockaddr_in from;
   struct ip_hdr *iphdr;

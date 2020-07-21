@@ -258,6 +258,37 @@ menu "Drinkworks Configuration"
             default 1 if DW_LOG_OTA_L1
             default 2 if DW_LOG_OTA_L2
             default 3 if DW_LOG_OTA_L3
+            
+        choice DW_LOG_IMG_PROCES_LEVEL
+            bool "Image processing log verbosity"
+            default DW_LOG_IMG_PROCES_NONE
+            help
+                Specify how much output to see in Image Processing logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_IMG_PROCES_NONE
+                bool "No output"
+            config DW_LOG_IMG_PROCES_ERROR
+                bool "Error"
+            config DW_LOG_IMG_PROCES_WARN
+                bool "Warning"
+            config DW_LOG_IMG_PROCES_INFO
+                bool "Info"
+            config DW_LOG_IMG_PROCES_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_IMG_PROCES_LEVEL
+            int
+            default 0 if DW_LOG_IMG_PROCES_NONE
+            default 1 if DW_LOG_IMG_PROCES_ERROR
+            default 2 if DW_LOG_IMG_PROCES_WARN
+            default 3 if DW_LOG_IMG_PROCES_INFO
+            default 4 if DW_LOG_IMG_PROCES_DEBUG
  
     endmenu
 

@@ -181,7 +181,8 @@ ping_send(int s, ip_addr_t *addr)
 static void
 ping_recv(int s)
 {
-  char buf[64];
+//  char buf[64];
+  char buf[1024 + 28];                                 // Increase Receive buffer size so it can handle the full response of a 1024 byte ping
   int len;
   struct sockaddr_in from;
   struct ip_hdr *iphdr;

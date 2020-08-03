@@ -148,7 +148,9 @@ static esp_err_t bootloader_main()
     wdt_reset_check();
     ESP_LOGI(TAG, "ESP-IDF %s 2nd stage bootloader", IDF_VER);
 
-    ESP_LOGI(TAG, "compile time " __TIME__ );
+#ifdef CONFIG_APP_COMPILE_TIME_DATE
+    ESP_LOGI(TAG, "compile time " __TIME__ );				/* Only add compile time message is APP_COMPILE_TIME_DATE configured in sdkconfig - INW */
+#endif
     ets_set_appcpu_boot_addr(0);
 
 #ifdef CONFIG_BOOTLOADER_WDT_ENABLE

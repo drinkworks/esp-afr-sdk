@@ -170,6 +170,37 @@ menu "Drinkworks Configuration"
             default 2 if DW_LOG_NVS_WARN
             default 3 if DW_LOG_NVS_INFO
             default 4 if DW_LOG_NVS_DEBUG
+            
+        choice DW_LOG_SHADOW_LEVEL
+            bool "Shadow log verbosity"
+            default DW_LOG_SHADOW_NONE
+            help
+                Specify how much output to see in Shadow logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_SHADOW_NONE
+                bool "No output"
+            config DW_LOG_SHADOW_ERROR
+                bool "Error"
+            config DW_LOG_SHADOW_WARN
+                bool "Warning"
+            config DW_LOG_SHADOW_INFO
+                bool "Info"
+            config DW_LOG_SHADOW_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_SHADOW_LEVEL
+            int
+            default 0 if DW_LOG_SHADOW_NONE
+            default 1 if DW_LOG_SHADOW_ERROR
+            default 2 if DW_LOG_SHADOW_WARN
+            default 3 if DW_LOG_SHADOW_INFO
+            default 4 if DW_LOG_SHADOW_DEBUG
     
         choice DW_LOG_CRED_LEVEL
             bool "Credential Storage log verbosity"

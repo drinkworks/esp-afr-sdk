@@ -224,7 +224,69 @@ menu "Drinkworks Configuration"
             config DW_LOG_CRED_DEBUG
                 bool "Debug"
         endchoice
+
+        choice DW_LOG_TIMESYNC_LEVEL
+            bool "TimeSync log verbosity"
+            default DW_LOG_TIMESYNC_NONE
+            help
+                Specify how much output to see in TimeSync logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_TIMESYNC_NONE
+                bool "No output"
+            config DW_LOG_TIMESYNC_ERROR
+                bool "Error"
+            config DW_LOG_TIMESYNC_WARN
+                bool "Warning"
+            config DW_LOG_STIMESYNC_INFO
+                bool "Info"
+            config DW_LOG_TIMESYNC_DEBUG
+                bool "Debug"
+        endchoice
         
+        config DW_LOG_TIMESYNC_LEVEL
+            int
+            default 0 if DW_LOG_TIMESYNC_NONE
+            default 1 if DW_LOG_TIMESYNC_ERROR
+            default 2 if DW_LOG_TIMESYNC_WARN
+            default 3 if DW_LOG_TIMESYNC_INFO
+            default 4 if DW_LOG_TIMESYNC_DEBUG
+    
+        choice DW_LOG_EVENTRECORD_LEVEL
+            bool "Shadow log verbosity"
+            default DW_LOG_EVENTRECORD_NONE
+            help
+                Specify how much output to see in Event Record logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_EVENTRECORD_NONE
+                bool "No output"
+            config DW_LOG_EVENTRECORD_ERROR
+                bool "Error"
+            config DW_LOG_EVENTRECORD_WARN
+                bool "Warning"
+            config DW_LOG_EVENTRECORD_INFO
+                bool "Info"
+            config DW_LOG_EVENTRECORD_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_EVENTRECORD_LEVEL
+            int
+            default 0 if DW_LOG_EVENTRECORD_NONE
+            default 1 if DW_LOG_EVENTRECORD_ERROR
+            default 2 if DW_LOG_EVENTRECORD_WARN
+            default 3 if DW_LOG_EVENTRECORD_INFO
+            default 4 if DW_LOG_EVENTRECORD_DEBUG
+    
         config DW_LOG_CRED_LEVEL
             int
             default 0 if DW_LOG_CRED_NONE

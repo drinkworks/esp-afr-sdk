@@ -287,14 +287,6 @@ menu "Drinkworks Configuration"
             default 3 if DW_LOG_EVENTRECORD_INFO
             default 4 if DW_LOG_EVENTRECORD_DEBUG
     
-        config DW_LOG_CRED_LEVEL
-            int
-            default 0 if DW_LOG_CRED_NONE
-            default 1 if DW_LOG_CRED_ERROR
-            default 2 if DW_LOG_CRED_WARN
-            default 3 if DW_LOG_CRED_INFO
-            default 4 if DW_LOG_CRED_DEBUG
-    
         choice DW_LOG_FLEET_PROVISIONING_LEVEL
             bool "Fleet Provisioning log verbosity"
             default DW_LOG_FLEET_PROVISIONING_NONE
@@ -382,6 +374,37 @@ menu "Drinkworks Configuration"
             default 2 if DW_LOG_IMG_PROCES_WARN
             default 3 if DW_LOG_IMG_PROCES_INFO
             default 4 if DW_LOG_IMG_PROCES_DEBUG
+            
+        choice DW_LOG_HOSTOTA_LEVEL
+            bool "Host OTA log verbosity"
+            default DW_LOG_HOSTOTA_NONE
+            help
+                Specify how much output to see in Host OTA logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_HOSTOTA_NONE
+                bool "No output"
+            config DW_LOG_HOSTOTA_ERROR
+                bool "Error"
+            config DW_LOG_HOSTOTA_WARN
+                bool "Warning"
+            config DW_LOG_HOSTOTA_INFO
+                bool "Info"
+            config DW_LOG_HOSTOTA_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_HOSTOTA_LEVEL
+            int
+            default 0 if DW_LOG_HOSTOTA_NONE
+            default 1 if DW_LOG_HOSTOTA_ERROR
+            default 2 if DW_LOG_HOSTOTA_WARN
+            default 3 if DW_LOG_HOSTOTA_INFO
+            default 4 if DW_LOG_HOSTOTA_DEBUG
  
     endmenu
 

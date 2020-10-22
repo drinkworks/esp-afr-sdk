@@ -398,6 +398,37 @@ menu "Drinkworks Configuration"
                 bool "Debug"
         endchoice
         
+        config DW_LOG_SYSPARAM_LEVEL
+            int
+            default 0 if DW_LOG_SYSPARAM_NONE
+            default 1 if DW_LOG_SYSPARAM_ERROR
+            default 2 if DW_LOG_SYSPARAM_WARN
+            default 3 if DW_LOG_SYSPARAM_INFO
+            default 4 if DW_LOG_SYSPARAM_DEBUG
+ 
+        choice DW_LOG_SYSPARAM_LEVEL
+            bool "System Parameter log verbosity"
+            default DW_LOG_SYSPARAM_NONE
+            help
+                Specify how much output to see in System Parameter logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_SYSPARAM_NONE
+                bool "No output"
+            config DW_LOG_SYSPARAM_ERROR
+                bool "Error"
+            config DW_LOG_SYSPARAM_WARN
+                bool "Warning"
+            config DW_LOG_SYSPARAM_INFO
+                bool "Info"
+            config DW_LOG_SYSPARAM_DEBUG
+                bool "Debug"
+        endchoice
+        
         config DW_LOG_HOSTOTA_LEVEL
             int
             default 0 if DW_LOG_HOSTOTA_NONE

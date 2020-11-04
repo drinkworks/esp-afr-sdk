@@ -257,7 +257,7 @@ menu "Drinkworks Configuration"
             default 4 if DW_LOG_TIMESYNC_DEBUG
     
         choice DW_LOG_EVENTRECORD_LEVEL
-            bool "Shadow log verbosity"
+            bool "Event Record log verbosity"
             default DW_LOG_EVENTRECORD_NONE
             help
                 Specify how much output to see in Event Record logs.

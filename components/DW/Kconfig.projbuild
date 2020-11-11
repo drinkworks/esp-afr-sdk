@@ -318,6 +318,37 @@ menu "Drinkworks Configuration"
             default 3 if DW_LOG_FLEET_PROVISIONING_INFO
             default 4 if DW_LOG_FLEET_PROVISIONING_DEBUG
 
+        choice DW_LOG_OTAUPDATE_LEVEL
+            bool "OTA Update log verbosity"
+            default DW_LOG_OTAUPDATE_NONE
+            help
+                Specify how much output to see in OTA Update logs.
+    
+                Note that this setting limits which log statements
+                are compiled into the program. So setting this to, say,
+                "Warning" would mean that changing log level to "Debug"
+                at runtime will not be possible.
+    
+            config DW_LOG_OTAUPDATE_NONE
+                bool "No output"
+            config DW_LOG_OTAUPDATE_ERROR
+                bool "Error"
+            config DW_LOG_OTAUPDATE_WARN
+                bool "Warning"
+            config DW_LOG_OTAUPDATE_INFO
+                bool "Info"
+            config DW_LOG_OTAUPDATE_DEBUG
+                bool "Debug"
+        endchoice
+        
+        config DW_LOG_OTAUPDATE_LEVEL
+            int
+            default 0 if DW_LOG_OTAUPDATE_NONE
+            default 1 if DW_LOG_OTAUPDATE_ERROR
+            default 2 if DW_LOG_OTAUPDATE_WARN
+            default 3 if DW_LOG_OTAUPDATE_INFO
+            default 4 if DW_LOG_OTAUPDATE_DEBUG
+    
         choice DW_LOG_OTA_LEVEL
             bool "FreeRTOS OTA Agent log verbosity"
             default DW_LOG_OTA_NONE

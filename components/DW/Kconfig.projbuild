@@ -460,13 +460,13 @@ menu "Drinkworks Configuration"
                 bool "Debug"
         endchoice
         
-        config DW_LOG_HOSTOTA_LEVEL
+        config DW_LOG_SYSPARAM_LEVEL
             int
-            default 0 if DW_LOG_HOSTOTA_NONE
-            default 1 if DW_LOG_HOSTOTA_ERROR
-            default 2 if DW_LOG_HOSTOTA_WARN
-            default 3 if DW_LOG_HOSTOTA_INFO
-            default 4 if DW_LOG_HOSTOTA_DEBUG
+            default 0 if DW_LOG_SYSPARAM_NONE
+            default 1 if DW_LOG_SYSPARAM_ERROR
+            default 2 if DW_LOG_SYSPARAM_WARN
+            default 3 if DW_LOG_SYSPARAM_INFO
+            default 4 if DW_LOG_SYSPARAM_DEBUG
  
     endmenu
 

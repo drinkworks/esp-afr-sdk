@@ -250,7 +250,7 @@ menu "Drinkworks Configuration"
                 bool "Error"
             config DW_LOG_TIMESYNC_WARN
                 bool "Warning"
-            config DW_LOG_STIMESYNC_INFO
+            config DW_LOG_TIMESYNC_INFO
                 bool "Info"
             config DW_LOG_TIMESYNC_DEBUG
                 bool "Debug"

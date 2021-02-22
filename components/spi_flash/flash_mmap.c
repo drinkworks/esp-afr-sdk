@@ -60,6 +60,10 @@ static LIST_HEAD(mmap_entries_head, mmap_entry_) s_mmap_entries_head =
 static uint8_t s_mmap_page_refcnt[REGIONS_COUNT * PAGES_PER_REGION] = {0};
 static uint32_t s_mmap_last_handle = 0;
 
+void xputc( char c )
+{
+    WRITE_PERI_REG(UART_FIFO_AHB_REG(CONFIG_CONSOLE_UART_NUM), c);
+}
 
 static void IRAM_ATTR spi_flash_mmap_init()
 {
@@ -123,6 +127,7 @@ esp_err_t IRAM_ATTR spi_flash_mmap(size_t src_addr, size_t size, spi_flash_mmap_
         pages[i] = phys_page+i;
     }
     ret = spi_flash_mmap_pages(pages, page_count, memory, out_ptr, out_handle);
+    printf( "spi_flash_mmap_pages - exit\n" );
     free(pages);
     return ret;
 }
@@ -147,7 +152,7 @@ esp_err_t IRAM_ATTR spi_flash_mmap_pages(const int *pages, size_t page_count, sp
     if (new_entry == 0) {
         return ESP_ERR_NO_MEM;
     }
-
+    printf( " spi_flash_mmap_pages(), pages = %p, page_count = %d, memory = %d, out_ptr = %p, out_handle = %p\n", pages, page_count, memory, out_ptr, out_handle );
     spi_flash_disable_interrupts_caches_and_other_cpu();
 
     spi_flash_mmap_init();
@@ -157,8 +162,10 @@ esp_err_t IRAM_ATTR spi_flash_mmap_pages(const int *pages, size_t page_count, sp
     uint32_t region_addr;  // base address of memory region
     get_mmu_region(memory,&region_begin,&region_size,&region_addr);
     if (region_size < page_count) {
+    	spi_flash_enable_interrupts_caches_and_other_cpu();			// from commit 4f3ddbb299f
         return ESP_ERR_NO_MEM;
     }
+
     // The following part searches for a range of MMU entries which can be used.
     // Algorithm is essentially naïve strstr algorithm, except that unused MMU
     // entries are treated as wildcards.
@@ -233,9 +240,11 @@ esp_err_t IRAM_ATTR spi_flash_mmap_pages(const int *pages, size_t page_count, sp
     }
 
     spi_flash_enable_interrupts_caches_and_other_cpu();
+    printf( " spi_flash_mmap_pages() - 8\n" );
     if (*out_ptr == NULL) {
         free(new_entry);
     }
+    printf( " spi_flash_mmap_pages() - 9\n" );
     return ret;
 }
 

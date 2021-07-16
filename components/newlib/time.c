@@ -37,6 +37,7 @@
 #include "freertos/task.h"
 #include "sdkconfig.h"
 #include "limits.h"
+#define CONFIG_ESP32_TIME_SYSCALL_USE_RTC_FRC1 1
 
 #if defined( CONFIG_ESP32_TIME_SYSCALL_USE_RTC ) || defined( CONFIG_ESP32_TIME_SYSCALL_USE_RTC_FRC1 )
 #define WITH_RTC 1
